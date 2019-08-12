@@ -7,8 +7,8 @@ server:
     - type: http
       port: 8091
 
-#logging:
-#  level: DEBUG
+logging:
+ level: INFO
 
 assets:
   overrides:
@@ -30,13 +30,13 @@ database:
   driverClass: org.postgresql.Driver
 
   # the username
-  user: postgres
+  user: micromacro
 
   # the password
-  password: postgres
+  password: xyzzy
 
   # the JDBC URL
-  url: jdbc:postgresql://127.0.0.1/oldbailey-alex
+  url: jdbc:postgresql://127.0.0.1/micromacro
 
   # any properties specific to your JDBC driver:
   properties:
@@ -61,6 +61,7 @@ database:
   # the maximum number of connections to keep open
   ## otherwise every connection makes a pool which doesn't get closed!
   maxSize: 10
+
 
   # whether or not idle connections should be validated
   #checkConnectionWhileIdle: false

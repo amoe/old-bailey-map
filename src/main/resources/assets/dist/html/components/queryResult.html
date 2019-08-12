@@ -1,0 +1,121 @@
+<div>
+
+    <div class="row">
+
+<!--        <div key-selector selected-keys="$ctrl.selectedKeys" keys="$ctrl.keyList"></div>-->
+
+        <div class="btn-group col-md-12">
+            <label class="btn btn-primary"
+                   ng-repeat="key in $ctrl.keyList"
+                   ng-model="$ctrl.selectedKeys[key]"
+                   uib-btn-checkbox>
+                {{key}}
+            </label>
+        </div>
+    </div>
+
+    <!--<div>{{$ctrl.totalItems}}</div>-->
+
+    <div class="row">
+        <div class="col-sm-5">
+<!--            <span ng-if="$ctrl.query.isCached">-->
+            <span >
+                <input class="form-control"
+                       type="text"
+                       ng-model="$ctrl.annotate.key"
+                       placeholder="namespace/name"
+                       uib-typeahead="key for key in $ctrl.keyList | filter:$viewValue">
+                <input class="form-control"
+                       type="text"
+                       ng-model="$ctrl.annotate.type"
+                       placeholder="type"
+                       uib-typeahead="type for type in $ctrl.typeList | filter:$viewValue">
+                <input class="form-control" type="text" ng-model="$ctrl.annotate.value" placeholder="value">
+                <button class="btn btn-primary" ng-click="$ctrl.annotateQuery()">Annotate Query</button>
+            </span>
+
+            <span ng-if="!$ctrl.query.isCached">
+                <button ng-disable="$ctrl.loading" class="btn btn-default" ng-click="$ctrl.cacheResults()">More Results</button>
+                <span ng-show="$ctrl.loading" class="animate-flicker">Loading...</span>
+            </span>
+
+            <span ng-if="$ctrl.isScoped()">
+                <button class="btn btn-primary" ng-csv="$ctrl.chunkCounts()" csv-header="['id', 'count']" filename="chunk-counts.csv">Get Chunk Counts</button>
+            </span>
+        </div>
+    </div>
+
+<!--    <div class="row">-->
+<!--        <button class="btn btn-primary" ng-click="$ctrl.chunkCounts()">Get Chunk Counts</button>-->
+<!--        <table class="table table-striped">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>ID</th><th>Chunk Count</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr ng-repeat="(id, count) in $ctrl.chunkCounts">-->
+<!--                <td>{{id}}</td><td>{{count}}</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+
+
+
+    <div class="row">
+        <span class="col-md-2">
+            <label class="section"> Goto Page <input class="form-control" style="width:40px" ng-model="$ctrl.currentPage"></label>
+        </span>
+        <span class="col-md-2">
+            <label class="section"> Goto ID <input class="form-control" style="width:150px" ng-change="$ctrl.gotoId($ctrl.selectedId)" ng-model="$ctrl.selectedId"></label>
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span uib-pagination
+                  ng-change="$ctrl.pageChange()"
+                  ng-model="$ctrl.currentPage"
+                  total-items="$ctrl.totalItems"
+                  items-per-page="$ctrl.numPerPage"
+                  max-size="10"
+                  boundary-link-numbers="true">
+            </span>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="table col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th ng-repeat="key in $ctrl.displayKeys" style="width:{{$ctrl.widths[key]}}%">{{key}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in $ctrl.page">
+                    <td ng-repeat="key in $ctrl.displayKeys" style="width:{{$ctrl.widths[key]}}%">
+                        <div>
+                            <div ng-if="row[key].type=='spans'">
+                                <div>
+                                    <span-text spanss="row[key]"> </span-text>
+                                </div>
+                            </div>
+
+                            <div ng-if="row[key].type!='spans'" >
+                                {{row[key].text}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

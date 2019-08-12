@@ -1,0 +1,127 @@
+<div class="row">
+
+    <form class="form-horizontal col-sm-12">
+
+        <div class="form-group form-group-sm">
+            <div class="section">
+                <label class="control-label" for="queryName">Query Name</label>
+                <input class="form-control input-sm" type="text" id="queryName" ng-model="$ctrl.queryId">
+            </div>
+
+            <!--<div class="section">
+
+                <label class="control-label" for="queryVer">Version</label>
+                <div class="input-group">
+                    <div class="input-group-addon btn btn-default"
+                         ng-click="undo()">Back</div>
+                    <input class="form-control input-sm" type="number" step="1" max="0" id="queryVer"
+                           ng-model="queryVer"
+                           ng-change="changeVer()">
+                    <div class="input-group-addon btn btn-default"
+                         ng-click="redo()"
+                         ng-disabled="queryVer == 0">Fwd</div>
+                </div>
+            </div>-->
+
+            <div class="section">
+                <label class="control-label" for="table" >Table</label>
+                <select class="form-control input-sm" id="table"
+                        ng-model="$ctrl.query.table"
+                        ng-options="table for table in $ctrl.tables"
+                        ng-change="$ctrl.reload()">
+                </select>
+            </div>
+
+            <!--<div class="section">
+
+                <label class="control-label" >Literals</label>
+
+                <literals literals="$ctrl.query.literals" keys="$ctrl.keyList"></literals>
+            </div>-->
+
+
+            <div ng-if="$ctrl.query._TYPE=='proximity'">
+                <div class="section">
+                    <label class="control-label" >Table Where</label>
+                    <div>
+                        <input class="form-control" type="text" ng-model="$ctrl.query.tableWhere">
+                    </div>
+                </div>
+
+                <div class="section">
+
+                    <label class="control-label" >Target</label>
+                    <input class="form-control" type="text" ng-model="$ctrl.query.target">
+
+                    <label class=" control-label">Proximity</label>
+                    <input class="form-control" type="text" ng-model="$ctrl.query.proximity">
+
+                    <label class=" control-label">Scope</label>
+                    <partition keys="$ctrl.keyList" ng-model="$ctrl.query.scope"></partition>
+
+                    <label class=" control-label">Distance</label>
+                    <input type="number" step="1" min="1" class="form-control" ng-model="$ctrl.query.distance">
+                </div>
+
+                <div class="section">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-checked="!!$ctrl.query.partition" ng-click="$ctrl.partitionQuery()">
+                            Partition
+                        </label>
+                    </div>
+
+                    <div ng-if="$ctrl.query.partition">
+
+                        <label class="control-label">Partition</label>
+                        <partition keys="$ctrl.keyList" ng-model="$ctrl.query.partition"></partition>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div ng-if="$ctrl.query._TYPE=='select'">
+                <div class="section">
+
+                    <label class="control-label">Order By</label>
+                    <order-by keys="$ctrl.keyList" ng-model="$ctrl.query.orderBy" ></order-by>
+                </div>
+
+                <div class="section">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-checked="!!$ctrl.query.partition" ng-click="$ctrl.partitionQuery()">
+                            Partition
+                        </label>
+                    </div>
+
+                    <div ng-if="$ctrl.query.partition">
+
+                        <label class="control-label">Partition</label>
+                        <partition keys="$ctrl.keyList" ng-model="$ctrl.query.partition"></partition>
+
+                    </div>
+                </div>
+
+                <div class="section">
+
+                    <label class="control-label">Filter</label>
+                    <input type="text" class="form-control" ng-model="$ctrl.query.filter">
+                </div>
+            </div>
+            <div class="section">
+                <label class="control-label">Initial Sample Size</label>
+                <input type="number" class="form-control" ng-model="$ctrl.sampleSize">
+                <button type="button" class='btn btn-default ' ng-click="$ctrl.execute($ctrl.sampleSize)" >Execute</button>
+            </div>
+
+        </div>
+    </form>
+
+
+
+</div>

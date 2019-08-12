@@ -1,0 +1,38 @@
+<div>
+    <div class="col-md-2">
+        <h4>Maps</h4>
+        <button class='btn btn-default' ui-sref=".newMap()">New Map</button>
+        <div ui-view="config"></div>
+    </div>
+
+    <div class="col-md-5">
+        <div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Queries</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="name in $ctrl.mapList">
+                    <td> <a href ng-click="$ctrl.active = $index">{{name}}</a> </td>
+                    <td> {{$ctrl.workspace.maps[name].queries}} </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <uib-tabset active="$ctrl.active">
+            <uib-tab ng-repeat="name in $ctrl.mapList"
+                     index="$index"
+                     heading="{{name}}"
+                     select="$ctrl.loadMap(name)">
+            </uib-tab>
+        </uib-tabset>
+        <div ui-view="map"></div>
+    </div>
+
+    <div ui-view="mapNotes"></div>
+
+</div>
