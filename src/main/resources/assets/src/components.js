@@ -1,3 +1,5 @@
+import {DatumFactory} from './ts/DatumFactory';
+
 function initializeComponents(MicroMacroApp) {
     console.log("initializing components");
 

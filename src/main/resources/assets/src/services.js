@@ -1,3 +1,5 @@
+import {DatumFactory} from './ts/DatumFactory';
+
 function initializeServices(MicroMacroApp) {
     console.log("initializing services");
 
