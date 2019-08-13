@@ -8,7 +8,14 @@ module.exports = {
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
-        port: 8080
+        port: 8080,
+        proxy: {
+            '/api/*': {
+                target: 'http://localhost:8090',
+                secure: false,
+                changeOrigin: true
+            }
+        }
     },
     resolve: {
         extensions: [ '.tsx', '.ts', '.js' ]
@@ -31,5 +38,5 @@ module.exports = {
                 use: ['file-loader']
             }
         ],
-    }
+    },
 };
