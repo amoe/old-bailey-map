@@ -11,6 +11,7 @@ buildNumber.properties
 .idea/
 src/main/resources/assets/bower_components
 src/main/resources/assets/node_modules/
+src/main/resources/assets/dist/bundle.js
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 data
