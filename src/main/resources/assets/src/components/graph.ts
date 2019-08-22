@@ -6,6 +6,28 @@ interface GraphController extends IController {
 };
 
 
+const REAL_DATA: TokenTreeNode = {
+    content: "Root",
+    id: 42,
+    label: "Blah",
+    strength: null,
+    children: [{
+        content: "Leaf",
+        id: 43,
+        label: "Blah3",
+        strength: null,
+        children: []
+    }]
+};
+
+function mutateTree(container: GraphDataContainer, source: TokenTreeNode) {
+    container.data.content = source.content;
+    container.data.id = source.id;
+    container.data.label = source.label;
+    container.data.strength = source.strength;
+    container.data.children = source.children;
+}
+
 const graph: ng.IComponentOptions = {
     templateUrl: 'html/components/graph.html',
     bindings: {
@@ -16,7 +38,14 @@ const graph: ng.IComponentOptions = {
 
         $ctrl.graphData = {
             isLoaded: false,
-            data: null
+            // A dummy node that should never be shown
+            data: {
+                content: "",
+                id: 0,
+                label: "",
+                strength: null,
+                children: []
+            }
         };
 
         // $ctrl.graphData = {
@@ -31,8 +60,12 @@ const graph: ng.IComponentOptions = {
                 url: '/api/graph'
             }).then(response => {
                 console.log("success");
+
+                //                $ctrl.graphData.data = response.data as TokenTreeNode;
+
+                // Reference finicky-ness here
+                mutateTree($ctrl.graphData, REAL_DATA);
                 $ctrl.graphData.isLoaded = true;
-                $ctrl.graphData.data = response.data as TokenTreeNode;
 
                 console.log("data updated with %o", $ctrl.graphData);
             }).catch(response => {

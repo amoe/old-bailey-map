@@ -10,7 +10,7 @@ interface IController {
 
 interface GraphDataContainer {
     isLoaded: boolean;
-    data: TokenTreeNode | null;
+    data: TokenTreeNode;
 }
 
 export { IController, GraphDataContainer, TokenTreeNode };
