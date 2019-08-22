@@ -8,6 +8,10 @@ const graph = {
         console.log("inside controller");
         const $ctrl = this;
 
+        $ctrl.graphData = {
+            isLoaded: false,
+            data: null
+        };
 
         this.$onInit = function() {
             console.log("inside oninit", $http);
@@ -15,7 +19,8 @@ const graph = {
                 method: 'GET',
                 url: '/api/graph'
             }).then(response => {
-                console.log("success");
+                $ctrl.graphData.isLoaded = true;
+                $ctrl.graphData.data = response.data;
             }).catch(response => {
                 console.log("failure");
             });
@@ -23,7 +28,8 @@ const graph = {
 
         this.$postLink = function() {
             console.log("inside postlink");
-            mountGraphView();
+            console.log("view of graphdata inside postlink: ", $ctrl.graphData);
+            mountGraphView($ctrl.graphData);
         };
     }
 };

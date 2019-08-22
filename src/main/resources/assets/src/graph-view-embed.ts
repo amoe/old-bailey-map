@@ -10,17 +10,19 @@ const GRAPH_DATA = {
     children: []
 }
 
-const props = {
-    width: 800,
-    height: 800,
-    xMargin: 0,
-    yMargin: 0,
-    depthOffset: 120,
-    textOffset: 22,
-    breadth: 360,
-    graphData: GRAPH_DATA,
-    textContentTemplate: "{{content}}"
-};
+function makeProps(graphData) {
+    return {
+        width: 800,
+        height: 800,
+        xMargin: 0,
+        yMargin: 0,
+        depthOffset: 120,
+        textOffset: 22,
+        breadth: 360,
+        graphData: graphData,
+        textContentTemplate: "{{content}}"
+    }
+}
 
 function doTweak(e) {
     console.log("I would tweak something");
@@ -36,13 +38,14 @@ function doTweak(e) {
 }
 
 
-export function mountGraphView() {
+function mountGraphView(graphData) {
     console.log("inside mountGraphView");
 
     Vue.use(Vuex);
 
     document.getElementById('tweak').addEventListener('click', doTweak);
 
+    const props = makeProps(graphData);
 
     const store = new Vuex.Store({
         modules: {
@@ -57,3 +60,6 @@ export function mountGraphView() {
     vueInstance.$mount('#graph-target');
 }
 
+
+
+export {mountGraphView};
