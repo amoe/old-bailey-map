@@ -1,6 +1,6 @@
-// import Vue from 'vue';
-// import Vuex from 'vuex';
-// import { GraphView, GraphViewModule } from 'occubrow-graph-view';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { GraphView, GraphViewModule } from 'occubrow-graph-view';
 
 // const GRAPH_DATA = {
 //     content: "Root",
@@ -38,28 +38,27 @@
 // }
 
 
-// function mountGraphView(graphData) {
-//     console.log("inside mountGraphView");
+function mountGraphView(graphData: any) {
+    console.log("inside mountGraphView");
 
-//     Vue.use(Vuex);
+    //     Vue.use(Vuex);
 
-//     document.getElementById('tweak').addEventListener('click', doTweak);
+    //     document.getElementById('tweak').addEventListener('click', doTweak);
 
-//     const props = makeProps(graphData);
+    //     const props = makeProps(graphData);
 
-//     const store = new Vuex.Store({
-//         modules: {
-//             graphView: GraphViewModule
-//         }
-//     });
+    //     const store = new Vuex.Store({
+    //         modules: {
+    //             graphView: GraphViewModule
+    //         }
+    //     });
 
-//     const vueInstance = new Vue({
-//         store,
-//         render: (h) => h(GraphView, { props })
-//     });
-//     vueInstance.$mount('#graph-target');
-// }
+    //     const vueInstance = new Vue({
+    //         store,
+    //         render: (h) => h(GraphView, { props })
+    //     });
+    //     vueInstance.$mount('#graph-target');
+}
 
 
-
-// export {mountGraphView};
+export { mountGraphView };
