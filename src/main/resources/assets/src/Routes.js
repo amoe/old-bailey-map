@@ -13,6 +13,15 @@ function configureRoutes(MicroMacroApp) {
             }
         });
 
+
+        $stateProvider.state('workspace.graph',{
+            url: '/graph',
+            component: 'graph',
+            resolve: {
+            }
+        });
+        
+
         /*
 
           MAPS

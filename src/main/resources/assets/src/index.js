@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'angular-ui-grid/ui-grid.min.css';
 import 'leaflet/dist/leaflet.css';
 import 'nvd3/build/nv.d3.min.css';
+import 'occubrow-graph-view/dist/occubrow-graph-view.css';
 
 // angular imports.
 

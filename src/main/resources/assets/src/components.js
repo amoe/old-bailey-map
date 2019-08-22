@@ -13,6 +13,7 @@ import spanText from './components/span-text';
 import summary from './components/summary';
 import workspace from './components/workspace';
 import workspaces from './components/workspaces';
+import graph from './components/graph';
 
 function initializeComponents(MicroMacroApp) {
     console.log("initializing components");
@@ -32,6 +33,7 @@ function initializeComponents(MicroMacroApp) {
     MicroMacroApp.component('summary', summary);
     MicroMacroApp.component('workspace', workspace);
     MicroMacroApp.component('workspaces', workspaces);
+    MicroMacroApp.component('graph', graph);
 
     //MicroMacroApp.component('notes', {
     //    templateUrl : 'html/note.html',

@@ -21,11 +21,18 @@ const workspace = {
             first = false;
         }
 
+        $ctrl.loadGraph = () => {
+            first || $state.go("workspace.graph")
+            first = false;
+        }
+
         $ctrl.$onInit = () => {
             if($state.$current.name.startsWith("workspace.queries")) {
                 $ctrl.mainActive = 0;
             } else if($state.$current.name.startsWith("workspace.maps")) {
                 $ctrl.mainActive = 1;
+            }  else if($state.$current.name.startsWith("workspace.graph")) {
+                $ctrl.mainActive = 2;
             }
         }
     }
