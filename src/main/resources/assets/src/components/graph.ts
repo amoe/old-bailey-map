@@ -1,5 +1,6 @@
 import { IController, GraphDataContainer, TokenTreeNode } from '../types';
 import { mountGraphView } from '../graph-view-embed';
+import { convert } from '../ts/jgrapht-converter';
 
 interface GraphController extends IController {
     graphData: GraphDataContainer;
@@ -61,6 +62,8 @@ const graph: ng.IComponentOptions = {
             }).then(response => {
                 console.log("success");
 
+                console.log("the response was %o", response.data);
+
                 //                $ctrl.graphData.data = response.data as TokenTreeNode;
 
                 // Reference finicky-ness here
@@ -75,6 +78,7 @@ const graph: ng.IComponentOptions = {
 
 
         $ctrl.$postLink = function() {
+            console.log(convert);
             console.log("inside postlink");
             console.log("view of graphdata inside postlink: ", $ctrl.graphData);
             mountGraphView($ctrl.graphData);
