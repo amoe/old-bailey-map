@@ -62,12 +62,14 @@ const graph: ng.IComponentOptions = {
             }).then(response => {
                 console.log("success");
 
-                console.log("the response was %o", response.data);
+                const jgraphtData = response.data;
+                const converted = convert(jgraphtData, 'Alice');
 
-                //                $ctrl.graphData.data = response.data as TokenTreeNode;
+                console.log("the response was %o", response.data);
+                console.log("converted data is %o", converted);
 
                 // Reference finicky-ness here
-                mutateTree($ctrl.graphData, REAL_DATA);
+                mutateTree($ctrl.graphData, converted);
                 $ctrl.graphData.isLoaded = true;
 
                 console.log("data updated with %o", $ctrl.graphData);
