@@ -50,8 +50,6 @@ const EXPECTED_OUTPUT = {
     ]
 }
 
-
-
 test('tree conversion', () => {
     const actualOutput = convert(SAMPLE_INPUT, 'Alice');
     expect(actualOutput).toEqual(EXPECTED_OUTPUT);
