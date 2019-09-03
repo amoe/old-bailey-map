@@ -1,22 +1,39 @@
 const buckets = require('buckets-js');
-const TreeModel = require('tree-model');
 
-function neighborsOf(graph: any, v: any) {
-    const result = [];
+function makeAdjacencyList(g: any): any {
+    const adj: any = {};
 
-    for (let edge of graph.edges) {
-        if (edge.source === v) {
-            result.push(edge.target);
+    // initialize node data
+    for (let node of g.nodes) {
+        adj[node.id] = {
+            data: node,
+            neighbours: []
+        };
+    }
+
+
+    // add edges
+    for (let edge of g.edges) {
+        const sourceNode = edge.source;
+
+        if (sourceNode in adj) {
+            adj[sourceNode].neighbours.push(edge.target);
+        } else {
+            throw new Error("unrecognized source node");
         }
     }
 
-    return result;
+    return adj;
 }
+
+
 
 export function convert(graph: any, dfsRoot: any) {
     const s = buckets.Stack();
     const currentRoot = buckets.Stack();
     const discovered = buckets.Set();
+
+    const adjacencyList = makeAdjacencyList(graph);
 
     // A fake node that makes things easier.
     const TOPLEVEL = { 'name': 'TOPLEVEL', 'children': [] };
@@ -28,15 +45,15 @@ export function convert(graph: any, dfsRoot: any) {
         const theRoot = currentRoot.pop();
 
         if (!discovered.contains(v)) {
-            const newNode = {
-                name: v,
-                children: []
-            };
-            theRoot.children.push(newNode);
+            const newNode = Object.assign(
+                { children: [] },
+                adjacencyList[v].data
+            );
 
+            theRoot.children.push(newNode);
             discovered.add(v);
 
-            for (let w of neighborsOf(graph, v)) {
+            for (let w of adjacencyList[v].neighbours) {
                 s.push(w);
                 currentRoot.push(newNode);
             }
