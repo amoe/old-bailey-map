@@ -1,58 +1,6 @@
 const buckets = require('buckets-js');
 const TreeModel = require('tree-model');
 
-// Not used by the below functions, this should really be in a test.
-const SAMPLE_INPUT = {
-    "creator": "JGraphT JSON Exporter",
-    "version": "1",
-    "nodes": [
-        {
-            "id": "Alice"
-        },
-        {
-            "id": "Bob"
-        },
-        {
-            "id": "Carol"
-        },
-        {
-            "id": "Dan"
-        }
-    ],
-    "edges": [
-        {
-            "id": "1",
-            "source": "Alice",
-            "target": "Bob"
-        },
-        {
-            "id": "2",
-            "source": "Bob",
-            "target": "Carol"
-        },
-        {
-            "id": "3",
-            "source": "Bob",
-            "target": "Dan"
-        }
-    ]
-};
-
-const EXPECTED_OUTPUT = {
-    "name": "Alice",
-    "children": [
-        {
-            "name": "Bob",
-            "children": [
-                { "name": "Dan", "children": [] },
-                { "name": "Carol", "children": [] }
-            ]
-        }
-    ]
-}
-
-
-
 function neighborsOf(graph: any, v: any) {
     const result = [];
 
