@@ -7,15 +7,19 @@ const SAMPLE_INPUT = {
     "nodes": [
         {
             "id": "Alice",
+            "strength": null,
         },
         {
             "id": "Bob",
+            "strength": 1,
         },
         {
             "id": "Carol",
+            "strength": 2,
         },
         {
             "id": "Dan",
+            "strength": 3,
         }
     ],
     "edges": [
@@ -39,16 +43,20 @@ const SAMPLE_INPUT = {
 
 const EXPECTED_OUTPUT = {
     "id": "Alice",
+    "strength": null,
     "children": [
         {
             "id": "Bob",
+            "strength": 1,
             "children": [
                 {
                     "id": "Dan",
+                    "strength": 3,
                     "children": []
                 },
                 {
                     "id": "Carol",
+                    "strength": 2,
                     "children": []
                 }
             ]
