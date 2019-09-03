@@ -63,7 +63,7 @@ const graph: ng.IComponentOptions = {
                 console.log("success");
 
                 const jgraphtData = response.data;
-                const converted = convert(jgraphtData, 'Alice');
+                const converted = convert(jgraphtData, 0);
 
                 console.log("the response was %o", response.data);
                 console.log("converted data is %o", converted);
@@ -73,7 +73,7 @@ const graph: ng.IComponentOptions = {
                 $ctrl.graphData.isLoaded = true;
 
                 console.log("data updated with %o", $ctrl.graphData);
-            }).catch(response => {
+            }, r => {
                 console.log("failure");
             });
         };

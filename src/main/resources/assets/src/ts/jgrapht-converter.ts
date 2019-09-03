@@ -34,26 +34,37 @@ export function convert(graph: any, dfsRoot: any) {
     const discovered = buckets.Set();
 
     const adjacencyList = makeAdjacencyList(graph);
+    console.log("adjacency list is %o", adjacencyList);
 
     // A fake node that makes things easier.
     const TOPLEVEL = { 'name': 'TOPLEVEL', 'children': [] };
     currentRoot.push(TOPLEVEL);
     s.push(dfsRoot);
 
+    const getNode = function(n: any) {
+        if (n in adjacencyList) {
+            return adjacencyList[n];
+        } else {
+            throw new Error("unrecognized node " + n);
+        }
+    };
+
     while (!s.isEmpty()) {
         const v = s.pop();
         const theRoot = currentRoot.pop();
 
         if (!discovered.contains(v)) {
+            const theNode = getNode(v);
+
             const newNode = Object.assign(
                 { children: [] },
-                adjacencyList[v].data
+                theNode.data
             );
 
             theRoot.children.push(newNode);
             discovered.add(v);
 
-            for (let w of adjacencyList[v].neighbours) {
+            for (let w of theNode.neighbours) {
                 s.push(w);
                 currentRoot.push(newNode);
             }

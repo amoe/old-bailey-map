@@ -49,5 +49,10 @@ module.exports = {
     ],
     optimization: {
         minimize: false
+    },
+    // Attempting to watch large node_modules can violate sysctl limits, causing
+    // weird behaviours.
+    watchOptions: {
+        ignored: /node_modules/
     }
 };
