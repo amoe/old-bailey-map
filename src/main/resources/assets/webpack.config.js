@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -45,7 +46,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/index.ejs'
         }),
-        new CopyWebpackPlugin([{from: 'static'}])
+        new CopyWebpackPlugin([{from: 'static'}]),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        })
     ],
     optimization: {
         minimize: false

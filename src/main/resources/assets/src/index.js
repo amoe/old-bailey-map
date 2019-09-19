@@ -9,9 +9,9 @@ import 'nvd3/build/nv.d3.min.css';
 // angular imports.
 
 // We can't do this at the moment, it breaks the whole page.
-//require('bootstrap');
+require('jquery');
+require('bootstrap');
 
-require('angular-ui');
 require('angular-ui-bootstrap');
 require('@uirouter/angularjs');
 require('ui-leaflet');
